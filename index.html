@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Centered Carousel</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to bottom, #1a1a1a, #4e54c8, #8f94fb);
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    .carousel {
+      position: relative;
+      width: 100px;
+      height: 150px;
+      perspective: 1500px;
+    }
+
+    .carousel__container {
+      position: absolute;
+      width: 150%;
+      height: 150%;
+      transform-style: preserve-3d;
+      transition: transform 1s ease-out;
+      transform: rotateX(-90deg);
+    }
+
+    .carousel__item {
+      position: absolute;
+      width: 150px;
+      height: 175px;
+      transform-origin: center;
+      display: style;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 0.9em;
+      font-weight: bold;
+      color: #fff;
+      box-shadow: 0 30px 20px rgba(0, 0, 0, 0.3);
+      transition: box-shadow 0.3s ease-in-out;
+    }
+
+    .carousel__item img {
+      width: 150%;
+      height: 175%;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+     /* Text centered in the middle of the entire carousel, behind the images */
+     .center-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 80px;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+      text-align: center;
+      z-index: 0; /* Text is behind the carousel items */
+    }
+    /* Text centered in the middle of the entire carousel, behind the images */
+    .center-text-2 {
+      position: absolute;
+      top: 200%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 20px;
+      font-weight: bold;
+      color: #0e0000;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+      text-align: center;
+      z-index: 0; /* Text is behind the carousel items */
+    }
+  </style>
+</head>
+<body>
+  <div class="carousel">
+    <div class="center-text">Happy New Year 2025(future doctor)</div>
+    <div class="center-text-2">click me and roll</div>
+    <div class="carousel__container">
+      <div class="carousel__item" style="transform: rotateY(0deg) translateZ(400px) translateY(0px);">
+        <img src="WhatsApp Image 2024-12-31 at 9.06.55 AM.jpeg" alt="Image 1" style="width: 150%; height: 150%; border-radius: 10px; object-fit: cover;">
+      </div>
+      <div class="carousel__item" style="transform: rotateY(36deg) translateZ(400px);">
+        <img src="WhatsApp Image 2024-12-30 at 5.11.51 PM.jpeg" alt="Image 2" style="width: 150%; height: 150%; border-radius: 10px; object-fit: cover;">
+      </div>
+      <div class="carousel__item" style="transform: rotateY(72deg) translateZ(400px);">
+        <img src="WhatsApp Image 2024-12-30 at 5.11.52 PM (1).jpeg" alt="Image 3" style="width: 150%; height: 150%; border-radius: 10px; object-fit: cover;">
+      </div>
+      <div class="carousel__item" style="transform: rotateY(108deg) translateZ(400px);">
+        <img src="WhatsApp Image 2024-12-30 at 5.11.52 PM.jpeg" alt="Image 4" style="width: 150%; height: 150%; border-radius: 10px; object-fit: cover;">
+      </div>
+      <div class="carousel__item" style="transform: rotateY(144deg) translateZ(400px);">
+        <img src="WhatsApp Image 2024-12-30 at 5.11.54 PM (1).jpeg" alt="Image 5" style="width: 150%; height: 150%; border-radius: 10px; object-fit: cover;">
+      </div>
+      <div class="carousel__item" style="transform: rotateY(180deg) translateZ(400px);">
+        <img src="WhatsApp Image 2024-12-30 at 5.11.55 PM (1).jpeg" alt="Image 6" style="width: 150%; height: 150%; border-radius: 10px; object-fit: cover;">
+      </div>
+      <div class="carousel__item" style="transform: rotateY(216deg) translateZ(400px);">
+        <img src="WhatsApp Image 2024-12-30 at 5.11.56 PM (1).jpeg" alt="Image 7" style="width: 150%; height: 150%; border-radius: 10px; object-fit: cover;">
+      </div>
+      <div class="carousel__item" style="transform: rotateY(252deg) translateZ(400px);">
+        <img src="WhatsApp Image 2024-12-30 at 5.11.51 PM (1).jpeg" alt="Image 8" style="width: 150%; height: 150%; border-radius: 10px; object-fit: cover;">
+      </div>
+      <div class="carousel__item" style="transform: rotateY(288deg) translateZ(400px);">
+        <img src="WhatsApp Image 2024-12-30 at 5.11.54 PM.jpeg" alt="Image 9" style="width: 150%; height: 150%; border-radius: 10px; object-fit: cover;">
+      </div>
+      <div class="carousel__item" style="transform: rotateY(324deg) translateZ(400px);">
+        <img src="WhatsApp Image 2024-12-30 at 5.11.57 PM.jpeg" alt="Image 10" style="width: 150%; height: 150%; border-radius: 10px; object-fit: cover;">
+      </div>
+      <!-- Continue for other items -->
+    </div>
+  </div>
+
+  <script>
+    const carouselContainer = document.querySelector('.carousel__container');
+    let currentAngle = 0;
+    let startX = 0;
+    let isDragging = false;
+
+    document.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.clientX;
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (isDragging) {
+        const dx = e.clientX - startX;
+        currentAngle += dx * 0.2;
+        carouselContainer.style.transform = `rotateX(-10deg) rotateY(${currentAngle}deg)`;
+        startX = e.clientX;
+      }
+    });
+
+    document.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
+
+    document.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      startX = e.touches[0].clientX;
+    });
+
+    document.addEventListener('touchmove', (e) => {
+      if (isDragging) {
+        const dx = e.touches[0].clientX - startX;
+        currentAngle += dx * 0.2;
+        carouselContainer.style.transform = `rotateX(-10deg) rotateY(${currentAngle}deg)`;
+        startX = e.touches[0].clientX;
+      }
+    });
+
+    document.addEventListener('touchend', () => {
+      isDragging = false;
+    });
+  </script>
+</body>
+</html>
